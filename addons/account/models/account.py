@@ -664,15 +664,17 @@ class AccountTax(models.Model):
     tax_group_id = fields.Many2one('account.tax.group', string="Tax Group", default=_default_tax_group, required=True)
     # Technical field to make the 'use_cash_basis' field invisible if the same named field is set to false in 'res.company' model
     hide_use_cash_basis = fields.Boolean(string='Hide Use Cash Basis Option', related='company_id.use_cash_basis')
-    use_cash_basis = fields.Boolean(
-        'Use Cash Basis',
-        help="Select this if the tax should use cash basis,"
-        "which will create an entry for this tax on a given account during reconciliation")
+    use_cash_basis = fields.Selection(
+        [('on_invoice', 'Based on Invoice'),
+         ('on_payment', 'Based on Payment'),
+        ], string='Tax Due', default='on_invoice',
+        help="Based on Invoice: the tax is due as soon as the invoice is validated.\n"
+        "Based on Payment: the tax is due as soon as the payment of the invoice is received.")
     cash_basis_account = fields.Many2one(
         'account.account',
         string='Tax Received Account',
         domain=[('deprecated', '=', False)],
-        help='Account use when creating entry for tax cash basis')
+        help='Account used for the journal entry for the tax due based on payment.')
 
     _sql_constraints = [
         ('name_company_uniq', 'unique(name, company_id, type_tax_use)', 'Tax names must be unique !'),

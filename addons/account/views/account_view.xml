@@ -1054,8 +1054,8 @@
                                     <field name="include_base_amount" attrs="{'invisible':[('amount_type','=', 'group')]}" />
                                     <field name="tax_adjustment"/>
                                     <field name="hide_use_cash_basis" invisible="1"/>
-                                    <field name="use_cash_basis" attrs="{'invisible':['|', ('amount_type','=', 'group'), ('hide_use_cash_basis', '=', False)]}"/>
-                                    <field name="cash_basis_account" attrs="{'invisible': [('use_cash_basis', '=', False)], 'required': [('use_cash_basis', '=', True)]}"/>
+                                    <field name="use_cash_basis" widget="radio" attrs="{'invisible':['|', ('amount_type','=', 'group'), ('hide_use_cash_basis', '=', False)]}"/>
+                                    <field name="cash_basis_account" attrs="{'invisible': [('use_cash_basis', '=', 'on_invoice')], 'required': [('use_cash_basis', '=', 'on_payment')]}"/>
                                 </group>
                             </group>
                         </page>
@@ -1854,8 +1854,8 @@
                                     <field name="tag_ids" domain="[('applicability', '!=', 'accounts')]" widget="many2many_tags" context="{'default_applicability': 'taxes'}"/>
                                     <field name="active" groups="base.group_no_one"/>
                                     <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
-                                    <field name="use_cash_basis" attrs="{'invisible':[('amount_type','=', 'group')]}"/>
-                                    <field name="cash_basis_account" attrs="{'invisible': [('use_cash_basis', '=', False)], 'required': [('use_cash_basis', '=', True)]}"/>
+                                    <field name="use_cash_basis" widget="radio" attrs="{'invisible':[('amount_type','=', 'group')]}"/>
+                                    <field name="cash_basis_account" attrs="{'invisible': [('use_cash_basis', '=', 'on_invoice')], 'required': [('use_cash_basis', '=', 'on_payment')]}"/>
                                 </group>
                             </group>
                         </page>
