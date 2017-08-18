@@ -888,7 +888,7 @@ var StatementModel = BasicModel.extend({
         })));
         var filter = line.filter || "";
         var offset = line.offset;
-        var limit = 6;
+        var limit = 40;
         return this._rpc({
                 model: 'account.bank.statement.line',
                 method: 'get_move_lines_for_reconciliation_widget',
@@ -1228,7 +1228,7 @@ var ManualModel = StatementModel.extend({
         })));
         var filter = line.filter || "";
         var offset = line.offset;
-        var limit = 6;
+        var limit = 40;
         var args = [line.account_id.id, line.partner_id, excluded_ids, filter, offset, limit];
         return this._rpc({
                 model: 'account.move.line',

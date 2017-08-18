@@ -236,8 +236,6 @@ var LineRenderer = Widget.extend(FieldManagerMixin, {
         'click .accounting_view thead td': '_onTogglePanel',
         'click .accounting_view tfoot td': '_onShowPanel',
         'input input.filter': '_onFilterChange',
-        'click .match_controls .fa-chevron-left:not(.disabled)': '_onPrevious',
-        'click .match_controls .fa-chevron-right:not(.disabled)': '_onNext',
         'click .match .mv_line td': '_onSelectMoveLine',
         'click .accounting_view tbody .mv_line td': '_onSelectProposition',
         'click .o_reconcile_models button': '_onQuickCreateProposition',
@@ -579,18 +577,6 @@ var LineRenderer = Widget.extend(FieldManagerMixin, {
      */
     _onFilterChange: function () {
         this.trigger_up('change_filter', {'data': _.str.strip($(event.target).val())});
-    },
-    /**
-     * @private
-     */
-    _onPrevious: function () {
-        this.trigger_up('change_offset', {'data': -5});
-    },
-    /**
-     * @private
-     */
-    _onNext: function () {
-        this.trigger_up('change_offset', {'data': 5});
     },
     /**
      * @private
